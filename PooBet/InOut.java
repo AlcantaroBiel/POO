@@ -1,4 +1,4 @@
-package PooBet;
+package upinout;
 
 import javax.swing.JOptionPane;
 
