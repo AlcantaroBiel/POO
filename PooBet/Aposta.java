@@ -68,4 +68,7 @@ public class Aposta {
         return jogo;
     }
 
+    //metodo criar biblioteca de jogos
+    ArrayList <Jogo> bibliotecaDeJogos = new ArrayList<Jogo>();
+
 }

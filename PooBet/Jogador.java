@@ -141,14 +141,22 @@ public class Jogador {
                                                     aposta.setValorAposta(valorAposta);
                                                     //perguntar sobre o repetir aposta
                                                     
-                                                    aposta.setJogador(jogador);
                                                     //set jogo
+                                                    String listaJogoFinal = "";
+                                                    for(Jogo jogo : .getBibliotecaDeJogos()){
+                                                        String listaJogo = "Jogo: "+jogo.getDescritivo()+"; \nAposta máxima: "+jogo.getApostaMax()+"; \nPremio máximo: "+jogo.getPremioMax()+"; \nId: "+jogo.getIdJogo()+". \n";
+                                                        listaJogoFinal = listaJogoFinal + listaJogo;
+                                                    }
+                                                    int optJogo = InOut.leInt("Escolha em qual jogo irá apostar: \nJogos disponíveis: \n"+listaJogoFinal);
+                                                    aposta.setJogador(jogador);
 
                                                     InOut.MsgDeInformacao("APOSTA CRIADA", "Aposta criada: \nValor da aposta: "+aposta.getValorAposta()+"; \nJogador: "+jogador.getApelido()+"; \nJogo: ");
                                                 }
                                                 else if(optAposta == 2){
+                                                    String verificarApostaFinal = "";
                                                     for(Aposta aposta : jogador.listaDeApostas){
-                                                        
+                                                        String verificarAposta = "ID: "+aposta.getIdAposta()+"; \nValor da aposta: "+aposta.getValorAposta()+"; \nJogo: "+aposta.getJogo()+". \n";
+                                                        verificarApostaFinal = verificarApostaFinal + verificarAposta;
                                                     }
 
                                                 }
