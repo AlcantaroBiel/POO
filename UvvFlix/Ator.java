@@ -15,12 +15,12 @@ public class Ator {
     }
 
     //gerarid
-    void createId(){
+    void createIdAtor(){
         this.idAtor = contador;
         contador++;
     }
 
-    int getId(){
+    int getIdAtor(){
         return idAtor;
     }
 

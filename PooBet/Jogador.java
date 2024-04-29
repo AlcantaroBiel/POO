@@ -4,9 +4,8 @@ import java.util.List;
 import PooBet.InOut;
 
 public class Jogador {
-    
+
     //att
-    int idJogador;
     String nome;
     String sobrenome;
     String apelido;
@@ -16,7 +15,7 @@ public class Jogador {
     private Credito credito;
     private ArrayList <Aposta> listaDeApostas;
 
-    void Aposta(){
+    void Jogador(){
         this.listaDeApostas = new ArrayList<Aposta>();
     }
 
@@ -31,10 +30,10 @@ public class Jogador {
     //metodo menu
     void menu(){
         List <Jogador> listaJogadores = new ArrayList <Jogador>();
-        
+
         while(true){
 
-            int opt = InOut.leInt("MENU \n[1] - Criar Conta; \n[2] - Acessar Conta; \n[0] - End");
+            int opt = InOut.leInt("MENU \n[1] - Criar Conta \n[2] - Acessar Conta \n[0] - End");
             if(opt == 0){
                 break;
             }
@@ -53,11 +52,10 @@ public class Jogador {
                 jogador.setNacionalidade(nacionalidade);
                 String dataNascimento = InOut.leString("Insira sua data de nascimento: ");
                 jogador.setDataNascimento(dataNascimento);
-                System.out.print(jogador.credito);
 
                 listaJogadores.add(jogador);
 
-                
+                InOut.MsgDeInformacao("CONTA CRIADA", "Conta criada: \nNome: "+jogador.getNome()+" "+jogador.getSobrenome()+"\nApelido: "+jogador.getApelido()+"\nCPF: "+jogador.getCPF()+"\nNacionalidade: "+jogador.getNacionalidade()+"\nData de nascimento: "+jogador.getDataNascimento());
             }
             if(opt == 2){
                 //Acessa conta existente
@@ -73,20 +71,20 @@ public class Jogador {
                     for(Jogador jogador : listaJogadores){
                         if(jogador.getCPF().equals(pesquisaCPF)){
                             while(true){
-                                int optehvc = InOut.leInt("Este é você? \nApelido: "+jogador.getApelido()+"; \nNome: "+jogador.getNome()+" "+jogador.getSobrenome()+"; \nCPF: "+jogador.getCPF()+"; \nNacionalidade: "+jogador.getNacionalidade()+"; \nData de nascimento: "+jogador.getDataNascimento()+".\n-------------------- \n[1] - Sim \n[0] - Não");
+                                int optehvc = InOut.leInt("Este é você? \nApelido: "+jogador.getApelido()+" \nNome: "+jogador.getNome()+" "+jogador.getSobrenome()+" \nCPF: "+jogador.getCPF()+" \nNacionalidade: "+jogador.getNacionalidade()+" \nData de nascimento: "+jogador.getDataNascimento()+".\n-------------------------- \n[1] - Sim \n[0] - Não");
                                 if(optehvc == 0){
                                     break;
                                 }
                                 if(optehvc == 1){
                                     while(true){
-                                        int optMenu = InOut.leInt("MENU PRINCIPAL \n[1] - Crédito; \n[2] - Apostar; \n[0] - Sair.");
+                                        int optMenu = InOut.leInt("MENU PRINCIPAL \n[1] - Crédito \n[2] - Apostar \n[0] - Sair");
                                         if(optMenu == 0){
                                             break;
                                         }
                                         else if(optMenu == 1){
                                             //menu crédito
                                             while(true){
-                                                int optCredito = InOut.leInt("MENU CRÉDITO \n[1] - Inserir crédito; \n[2] - Verificar crédito; \n[0] - Voltar");
+                                                int optCredito = InOut.leInt("MENU CRÉDITO \n[1] - Inserir crédito \n[2] - Verificar crédito \n[0] - Voltar");
                                                 if(optCredito == 0){
                                                     break;
                                                 }
@@ -99,16 +97,30 @@ public class Jogador {
                                                     credito.setValidade(validade);
                                                     String moeda = InOut.leString("Insira a moeda: ");
                                                     credito.setMoeda(moeda);
+                                                    while(true){
                                                     String bloqueado = InOut.leString("Insira se a conta está bloqueada: \n[1] - Sim \n[0] - Não");
-                                                    if(bloqueado.equals("1")){
-                                                        credito.setBloqueado(true);
-                                                    }
-                                                    else if(bloqueado.equals("0")){
-                                                        credito.setBloqueado(false);
+                                                        if(bloqueado.equals("1")){
+                                                            credito.setBloqueado(true);
+                                                            break;
+                                                        }
+                                                        else if(bloqueado.equals("0")){
+                                                            credito.setBloqueado(false);
+                                                            break;
+                                                        }
                                                     }
                                                     credito.setJogador(jogador);
                                                     jogador.setCredito(credito);
-                
+
+                                                    boolean status = jogador.credito.getBloqueado();
+                                                    String statusRetorno = "";
+                                                    if(status){
+                                                        statusRetorno = "Bloqueado";
+                                                    }else{
+                                                        statusRetorno = "Ativo";
+                                                    }  
+
+                                                    InOut.MsgDeInformacao("CREDITO ADICIONADO", "Crédito adicionado: \nSaldo: "+credito.getSaldo()+"\nValidade: "+credito.getValidade()+"\nMoeda: "+credito.getMoeda()+"\nStatus da conta: "+statusRetorno);
+
                                                 }
                                                 else if(optCredito == 2){
                                                     //Verificar crédito
@@ -122,7 +134,7 @@ public class Jogador {
                                                         }else{
                                                             statusRetorno = "Ativo";
                                                         }                                                       
-                                                        InOut.MsgDeInformacao("Crédito", "Jogador: "+jogador.getApelido()+"; \nSaldo: "+jogador.getCredito().getSaldo()+"; \nValidade: "+jogador.getCredito().getValidade()+"; \nStatus da conta: "+statusRetorno+".");
+                                                        InOut.MsgDeInformacao("Crédito", "Jogador: "+jogador.getApelido()+" \nSaldo: "+jogador.getCredito().getSaldo()+" \nValidade: "+jogador.getCredito().getValidade()+" \nStatus da conta: "+statusRetorno+".");
                                                     }  
                                                 }
                                             }
@@ -130,48 +142,72 @@ public class Jogador {
                                         else if(optMenu == 2){
                                             //menu aposta
                                             while(true){
-                                                int optAposta = InOut.leInt("MENU APOSTA \n[1] - Criar aposta; \n[2] - Verificar suas apostas; \n[0] - Sair.");
-                                                if(optAposta == 0){
-                                                    break;
-                                                }
-                                                else if(optAposta == 1){
+                                                    //criar aposta
+                                                    if(jogador.getCredito() == null){
+                                                        InOut.MsgDeErro("ERRO", "Nenhum registro de crédito foi inserido para essa conta, acesse o menu crédito!");
+                                                        break;
+                                                    }
+
+                                                    if(jogador.credito.getBloqueado()){
+                                                        InOut.MsgDeErro("ERRO", "Essa conta está bloqueada!");
+                                                        break;
+                                                    }
+
                                                     Aposta aposta = new Aposta();
+
+                                                    ArrayList <Jogo> bibliotecaJogos = aposta.gerarOuRetornarBibliotecaJogos();
                                                     aposta.gerarIdAposta();
-                                                    double valorAposta = InOut.leDouble("Insira o valor da sua aposta: ");
+                                                    
+                                                    double valorAposta = InOut.leDouble("Insira o valor da sua aposta: \n[0] - Voltar");
+                                                    if(valorAposta == 0){
+                                                        break;
+                                                    }
+                                                    else if(jogador.getCredito().getSaldo() < valorAposta){
+                                                        InOut.MsgDeErro("ERRO", "Crédito insuficiente!");
+                                                        break;
+                                                    }
+
                                                     aposta.setValorAposta(valorAposta);
-                                                    //perguntar sobre o repetir aposta
                                                     
                                                     //set jogo
-                                                    String listaJogoFinal = "";
-                                                    for(Jogo jogo : .getBibliotecaDeJogos()){
-                                                        String listaJogo = "Jogo: "+jogo.getDescritivo()+"; \nAposta máxima: "+jogo.getApostaMax()+"; \nPremio máximo: "+jogo.getPremioMax()+"; \nId: "+jogo.getIdJogo()+". \n";
-                                                        listaJogoFinal = listaJogoFinal + listaJogo;
-                                                    }
-                                                    int optJogo = InOut.leInt("Escolha em qual jogo irá apostar: \nJogos disponíveis: \n"+listaJogoFinal);
-                                                    aposta.setJogador(jogador);
-
-                                                    InOut.MsgDeInformacao("APOSTA CRIADA", "Aposta criada: \nValor da aposta: "+aposta.getValorAposta()+"; \nJogador: "+jogador.getApelido()+"; \nJogo: ");
-                                                }
-                                                else if(optAposta == 2){
-                                                    String verificarApostaFinal = "";
-                                                    for(Aposta aposta : jogador.listaDeApostas){
-                                                        String verificarAposta = "ID: "+aposta.getIdAposta()+"; \nValor da aposta: "+aposta.getValorAposta()+"; \nJogo: "+aposta.getJogo()+". \n";
-                                                        verificarApostaFinal = verificarApostaFinal + verificarAposta;
+                                                    String listaJogosFinal = "";
+                                                    for(Jogo jogo : bibliotecaJogos){
+                                                        String listaJogos = "Jogo: " + jogo.getDescritivo() + " \nAposta máxima: " + jogo.getApostaMax() + " \nPremio máximo: " + jogo.getPremioMax() + " \nId: " + jogo.getIdJogo() + " \n\n";
+                                                        listaJogosFinal += listaJogos;
                                                     }
 
+                                                    Jogo jogoEscolhido = null;
+
+                                                    while(true){
+                                                        int optJogo = InOut.leInt("Escolha em qual jogo irá apostar: \nJogos disponíveis: \n"+listaJogosFinal+"Insira o ID do jogo escolhido: ");
+                                                        for(Jogo jogo : bibliotecaJogos){
+                                                            if(optJogo == jogo.getIdJogo()){
+                                                                aposta.adicionarJogo(jogo);
+                                                                jogoEscolhido = jogo;
+                                                            }
+                                                        }
+
+                                                        if(jogoEscolhido != null){
+                                                            jogador.adicionarAposta(aposta);
+                                                            InOut.MsgDeInformacao("APOSTA CRIADA", "Aposta criada: \nValor da aposta: "+aposta.getValorAposta()+" \nJogo: "+jogoEscolhido.getDescritivo()+" \nJogador: "+jogador.getApelido());
+                                                            break;
+                                                            
+                                                        }
+
+                                                        InOut.MsgDeErro("ERRO", "Jogo não encontrado tente novamente!");
+                                                    }
+                                                    break;
                                                 }
+                                                
                                             }
                                         }
                                     }
                                     break;
                                 }
                             }  
-                        }
+                        }break;
                     }
                 }
-            }if(opt ==3){
-                //debug
-            }
         }
     }
 
@@ -239,11 +275,16 @@ public class Jogador {
     }
 
     //metodo adicionar e remover aposta
-    public void adicionarAposta(Aposta aposta){
-        listaDeApostas.add(aposta);
+    public void adicionarAposta(Aposta aposta) {
+        if (this.listaDeApostas == null) {
+            this.listaDeApostas = new ArrayList<Aposta>();
+        }
+        this.listaDeApostas.add(aposta);
+        System.out.println("Aposta adicionada: " + aposta);
     }
 
     public void removerAposta(Aposta aposta){
         listaDeApostas.remove(aposta);
     }
+
 }

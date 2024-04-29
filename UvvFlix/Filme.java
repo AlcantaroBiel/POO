@@ -20,12 +20,12 @@ public class Filme {
     //met
 
     //metodo id
-    void createId(){
+    void createIdFilme(){
         this.idFilme = contador;
         contador++;
     }
 
-    int getId(){
+    int getIdFilme(){
         return idFilme;
     }
 

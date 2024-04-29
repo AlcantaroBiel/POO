@@ -11,11 +11,7 @@ public class Jogo {
     String descritivo;
     double apostaMax;
     double premioMax;
-    private ArrayList <Aposta> listaDeApostas;
-
-    void Apostas(){
-        this.listaDeApostas = new ArrayList <Aposta>();
-    }
+    private Aposta aposta;
 
     //met
 
@@ -56,13 +52,14 @@ public class Jogo {
         return premioMax;
     }
 
-    //metodo adicionar e remover apostas
-    public void adicionarAposta(Aposta aposta){
-        listaDeApostas.add(aposta);
+    //metodo get set apostas
+    public void setAposta(Aposta aposta){
+        this.aposta = aposta;
     }
+    
 
-    public void removerAposta(Aposta aposta){
-        listaDeApostas.remove(aposta);
+    public Aposta getAposta(){
+        return aposta;
     }
-
+    
 }

@@ -4,25 +4,29 @@ import java.util.List;
 
 public class Sessao {
     //att
+    static int constante = 1;
+    int idSessao;
     boolean statusSessao;
     String horario;
     private ArrayList <Filme> filmes;
     private Sala sala;
 
-    //met
+    
     public Sessao(){
         this.filmes = new ArrayList<Filme>();
 
     }
 
-    public void adicionarFilme(Filme filme){
-        filmes.add(filme);
+    //met
+    //gerar e get id
+    void gerarIdSessao(){
+        this.idSessao = constante;
+        constante++;
     }
-
-    public ArrayList <Filme> getFilmes(){
-        return filmes;
+    
+    int getIdSessao(){
+        return idSessao;
     }
-
 
     //metodo get e set status sessao
     void setStatusSessao(boolean statusSessao){
@@ -52,6 +56,19 @@ public class Sessao {
 
     public Sala getSala(){
         return sala;
+    }
+
+    //metodo adicionar remover e get filme
+    public void adicionarFilme(Filme filme){
+        filmes.add(filme);
+    }
+
+    public void removerFilme(Filme filme){
+        filmes.remove(filme);
+    }
+
+    public ArrayList <Filme> getFilmes(){
+        return filmes;
     }
 
 

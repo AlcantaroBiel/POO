@@ -11,7 +11,7 @@ public class Credito {
     //met
     //metodo get set saldo
     void setSaldo(double saldo){
-        this.saldo = saldo;
+        this.saldo += saldo;
     }
 
     double getSaldo(){
